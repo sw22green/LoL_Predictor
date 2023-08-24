@@ -13,13 +13,12 @@
     
     What's the meta
         Pick/ban rate
+        Pick/ban order
         Winrate
 
     The team
         Team's standings
         their winstreak/lose streak
         Player experience
-
-    
 
  """
