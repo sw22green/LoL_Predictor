@@ -66,8 +66,11 @@ def readCSV(csv):
     
     for i in range(len(champList)):
         dict.update({champList[i]:champStatsList[i]})
+
+def findSynergies(champ, csv):
+    df = pd.read_csv(csv)
+    pass
         
-    print(dict['Neeko'])
 main()
 
 
