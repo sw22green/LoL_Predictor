@@ -15,17 +15,22 @@
         Team's standings
         their winstreak/lose streak
         Player experience
-
         
 
     What points to assign
-        a single champ strength-
-            (ban % across all games) + (WR% * 100)^2 * games played
+        single champ strength-
             (pickban * WR)
-        a players strength - 
+        players strength - 
             Sqrt graph of experience
-        a comps strength -
-            Synergies - if champs are picked together often then good synergy(USE INTERSECTION DATA TABLE)
-
+        # comps strength -
+        #     Synergies - if champs are picked together often then good synergy(USE INTERSECTION DATA TABLE)
+        team's strength-
+            WL ratio
+        
+    
+    What matters most - Team Strength> comp strength > single champ strength > player strength
             
+    
+    Machine Learning
+    Might need columns on player experience, team record, comp synergy, champ strength idk
  """

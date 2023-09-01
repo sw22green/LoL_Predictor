@@ -24,7 +24,7 @@ def main():
     urlList = ["https://lol.fandom.com/wiki/LCK/2023_Season/Spring_Season/Match_History", 
                "https://lol.fandom.com/wiki/LCK/2023_Season/Spring_Playoffs/Match_History", 
                "https://lol.fandom.com/wiki/LCK/2023_Season/Summer_Season/Match_History", 
-               "https://lol.fandom.com/wiki/LCK/2023_Season/Summer_Season/Match_History"]
+               "https://lol.fandom.com/wiki/LCK/2023_Season/Summer_Playoffs/Match_History"]
     
     allTeams = []
     allPlayers = []
@@ -88,7 +88,7 @@ def main():
         elif(i%10 == 6): redPlayerJug.append(allPlayers[i])
         elif(i%10 == 7): redPlayerMid.append(allPlayers[i])
         elif(i%10 == 8): redPlayerBot.append(allPlayers[i])
-        else: bluePlayerSup.append(allPlayers[i])
+        else: redPlayerSup.append(allPlayers[i])
 
     for i in range(len(allPicks)):
         if(i%10 == 0): blueChampTop.append(allPicks[i])
@@ -100,9 +100,8 @@ def main():
         elif(i%10 == 6): redChampJug.append(allPicks[i])
         elif(i%10 == 7): redChampMid.append(allPicks[i])
         elif(i%10 == 8): redChampBot.append(allPicks[i])
-        else: bluePlayerSup.append(allPicks[i])
+        else: redChampSup.append(allPicks[i])
 
-    
     df = pd.DataFrame(list(zip(blueTeam, redTeam, winnerTeam, allWinSide, bluePlayerTop, 
     bluePlayerJug, bluePlayerMid, bluePlayerBot, bluePlayerSup, redPlayerTop, redPlayerJug, 
     redPlayerMid, redPlayerBot, redPlayerSup, blueChampTop, blueChampJug, blueChampMid, 
@@ -111,8 +110,8 @@ def main():
     'bluePlayerMid', 'bluePlayerBot', 'bluePlayerSup', 'redPlayerTop',	'redPlayerJug', 'redPlayerMid',	
     'redPlayerBot',	'redPlayerSup', 'blueChampTop', 'blueChampJug', 'blueChampMid', 'blueChampBot', 
     'blueChampSup', 'redChampTop', 'redChampJug', 'redChampMid', 'redChampBot', 'redChampSup'])
-
-    df.to_csv('lol_data.csv', sep='\t', index = False)
+    print(df)
+    df.to_csv('lol_data.csv')
 
 def allData(url):
     options = Options()
@@ -128,15 +127,16 @@ def allData(url):
     info = []
     # Format: [Blue, Red, Winner, Blue, Red, Winner, Blue ...]
     teamsList = scrapeTeams(soup) 
-
+    # print(len(teamsList))
     # Format: [Blue1, Blue2, Blue3, Blue4,Blue5, Red1, Red2, Red3, Red4, Red5, Blue1 ...]
     playerList = scrapeRosters(soup)
-    
+    # print(len(playerList))
     # Format: [Blue1, Blue2, Blue3, Blue4,Blue5, Red1, Red2, Red3, Red4, Red5, Blue1 ...]
     picksList = scrapePicks(soup)
-
+    # print(len(picksList))
     # Blue or Red
     winSideList = winnerSide(teamsList)
+    # print(len(winSideList))
 
     info.append(teamsList)
     info.append(playerList)
@@ -159,7 +159,10 @@ def scrapeRosters(soup):
     playerNameData = soup.find_all(class_ = "catlink-players pWAG pWAN to_hasTooltip")
     playerList = []
     for player in playerNameData:
-        playerList.append(player['data-to-id'])
+        name = player['data-to-id']
+        if(name!="Zeka__28-Kim_Geon_2d-woo_29-" or playerList[-1]!="Zeka__28-Kim_Geon_2d-woo_29-"): 
+            playerList.append(name)
+        if(name=="Clid"): playerList.append("Zeka__28-Kim_Geon_2d-woo_29-")
 
     return playerList
 
@@ -177,13 +180,15 @@ def scrapePicks(soup):
 
 def winnerSide(teamsList):
     winSideList = []
-    for i in range(len(teamsList)//3-1):
+    for i in range(len(teamsList)//3):
         if(teamsList[3*(i+1)-1]==(teamsList[3*(i+1)-2])): winSideList.append("Red")
         else: winSideList.append("Blue")
     
     return winSideList
 
 main()
+
+
 # def readCSV(csv):
 #     dict = {}
 #     champList = []
@@ -207,7 +212,71 @@ main()
 #     df = pd.read_csv(csv)
 #     pass
         
-# main()
+
+    # print(len(allPlayers))
+    # print(allPlayers[-310:-290])
+    # print(blueTeam[-5:])
+    # print(redTeam[-5:])
+    # print(winnerTeam[-5:])
+    # print()
+    # print()
+    # print(bluePlayerTop[-5:])
+    # print(bluePlayerJug[-5:])
+    # print(bluePlayerMid[-5:])
+    # print(bluePlayerBot[-5:])
+    # print(bluePlayerSup[-5:])
+    # print()
+    # print()
+    # print(redPlayerTop[-5:])
+    # print(redPlayerJug[-5:])
+    # print(redPlayerMid[-5:])
+    # print(redPlayerBot[-5:])
+    # print(redPlayerSup[-5:])
+    # print()
+    # print()
+    # print(blueChampTop[-5:])
+    # print(blueChampJug[-5:])
+    # print(blueChampMid[-5:])
+    # print(blueChampBot[-5:])
+    # print(blueChampSup[-5:])
+    # print()
+    # print()
+    # print(redChampTop[-5:])
+    # print(redChampJug[-5:])
+    # print(redChampMid[-5:])  
+    # print(redChampBot[-5:])
+    # print(redChampSup[-5:])
+
+    # print(bluePlayerTop[0:5])
+    # print(len(bluePlayerTop))
+    # print(bluePlayerJug[0:5])
+    # print(len(bluePlayerJug))
+    # print(bluePlayerMid[0:5])
+    # print(len(bluePlayerMid))
+    # print(bluePlayerBot[0:5])
+    # print(len(bluePlayerBot))
+    # print(bluePlayerSup[0:5])
+    # print(len(bluePlayerSup))
+
+    # print()
+    # print()
+    
+    # print(redPlayerTop[0:5])
+    # print(len(redPlayerTop))
+    # print(redPlayerJug[0:5])
+    # print(len(redPlayerJug))
+    # print(redPlayerMid[0:5])
+    # print(len(redPlayerMid))
+    # print(redPlayerBot[0:5])
+    # print(len(redPlayerBot))
+    # print(redPlayerSup[0:5])
+    # print(len(redPlayerSup))
+
+    # print()
+    # print()
+
+    # print(allWinSide[-30:])
+    # print(len(allWinSide))
 
 
 
