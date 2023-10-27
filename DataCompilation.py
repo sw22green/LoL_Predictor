@@ -78,7 +78,6 @@ class DataProcessor:
             allPlayers.append(info[1])
             allPicks.append(info[2])
             allWinSide.append(info[3])
-            print("ANDYYYYYY BIG")
 
         allTeams = list(chain.from_iterable(allTeams))
         allPlayers = list(chain.from_iterable(allPlayers))
@@ -96,9 +95,9 @@ class DataProcessor:
         
 
 def main():
-    url_list = ["https://lol.fandom.com/wiki/Special:RunQuery/MatchHistoryGame?MHG%5Bpreload%5D=Tournament&MHG%5Btournament%5D=LCK%2F2023+Season%2FSpring+Season&_run=",
+    url_list = ["https://lol.fandom.com/wiki/Special:RunQuery/MatchHistoryGame?MHG%5Btournament%5D=LCK%2F2023+Season%2FSpring+Season&MHG%5Blimit%5D=500&MHG%5Bpreload%5D=Tournament&MHG%5Bspl%5D=yes&_run=",
                 "https://lol.fandom.com/wiki/Special:RunQuery/MatchHistoryGame?MHG%5Bpreload%5D=Tournament&MHG%5Btournament%5D=LCK%2F2023+Season%2FSpring+Playoffs&_run=",
-                "https://lol.fandom.com/wiki/Special:RunQuery/MatchHistoryGame?MHG%5Bpreload%5D=Tournament&MHG%5Btournament%5D=LCK%2F2023+Season%2FSummer+Season&_run=",
+                "https://lol.fandom.com/wiki/Special:RunQuery/MatchHistoryGame?MHG%5Btournament%5D=LCK%2F2023+Season%2FSummer+Season&MHG%5Blimit%5D=500&MHG%5Bpreload%5D=Tournament&MHG%5Bspl%5D=yes&_run=",
                 "https://lol.fandom.com/wiki/Special:RunQuery/MatchHistoryGame?MHG%5Bpreload%5D=Tournament&MHG%5Btournament%5D=LCK%2F2023+Season%2FSummer+Playoffs&_run="]
 
     processor = DataProcessor()
